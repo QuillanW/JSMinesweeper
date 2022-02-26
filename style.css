@@ -1,0 +1,30 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+    margin: 5px;
+    display: grid;
+}
+
+.spotBtn {
+    border: solid grey 1px;
+}
+
+.spotBtn:hover {
+    border-color: black;
+    border-width: 2px;
+}
+
+.resetBtn {
+    width: 100px;
+    height: 40px;
+}
+
+.safe {
+    background-color: green;
+}
+
+.boom {
+    background-color: red;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="controls">
+        Width<input type="number" id="sizeX">
+        Height<input type="number" id="sizeY">
+        Bombs<input type="number" id="bombInput">
+        <button onclick="create()">Create</button>
+    </div>
+    <div id="reset" style="display: none;">
+        <button onclick="reset()" class="resetBtn">Reset Game</button>
+    </div>
+    <div id="container">
+
+    </div>
+</body>
+</html>
