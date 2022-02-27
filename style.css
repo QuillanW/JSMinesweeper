@@ -21,6 +21,10 @@
     height: 40px;
 }
 
+.flag {
+    background-color: rgb(255, 100, 0);
+}
+
 .safe {
     background-color: green;
 }

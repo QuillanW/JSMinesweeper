@@ -1,4 +1,6 @@
 var bombLocations = [];
+let flagged = false;
+let clickedAmount = 0;
 
 function create() {
     document.getElementById('controls').style.display = 'none';
@@ -35,8 +37,20 @@ function create() {
         var newButton = document.createElement('button');
         newButton.id = i;
         newButton.classList.add('spotBtn');
-        newButton.addEventListener('mouseup', checkHit);
-        newButton.addEventListener('mouseup', checkHit);
+        newButton.addEventListener('mouseup', function(e) {
+            var e = e || window.event;
+            var btnCode = e.button;
+
+            switch (btnCode) {
+                case 0:
+                    checkHit();
+                    break;
+                case 2:
+                    placeFlag();
+                    break;
+                default:
+            }
+        });
 
         if (posX == sizeX) {
             posX = 0;
@@ -87,32 +101,63 @@ function checkHit() {
 
             checkPos = (clickedXY + direction).toFixed(4)
 
-            
-
             if (checkPos == bombXY) {
                 bombsNear++;
-                console.log('found', checkPos, bombXY)
             }
         }
     }
 
     for (let i = 0; i < bombLocations.length; i++) {
         if (clicked == bombLocations[i]) {
-            console.log('BOOM');
+            endGame(false);
             bombsNear = "";
             clickedBtn.classList.add('boom')
         } else if (clicked != bombLocations[i]) {
             clickedBtn.classList.add('safe')
             if (bombsNear == 0) {
                 bombsNear = "";
+                
             }
             clickedBtn.innerHTML = bombsNear;
         }
     }
+    
+    clickedAmount++;
+
+    console.log(clickedAmount, (sizeX * sizeY - bombs))
+
+    if (clickedAmount == (sizeX * sizeY - bombs)) {
+        endGame(true)
+    }
 }
 
 function placeFlag() {
+    clicked = event.target;
+    flagged = clicked.name == 'flag';
+    
+    if (flagged) {
+        clicked.classList.remove('flag')
+        clicked.name = ''
+    } else {
+        clicked.classList.add('flag')
+        clicked.name = 'flag'
+    }
+}
 
+function endGame(win) {
+    if (win) {
+        setTimeout(function() {
+            window.alert('You won!')
+            reset();
+        }, 500);
+        reset();
+    } else if (win == false) {
+        setTimeout(function() {
+            window.alert('You lost!')
+            reset();
+        }, 500);
+    }
+    
 }
 
 function reset() {
