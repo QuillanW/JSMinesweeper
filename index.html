@@ -10,9 +10,9 @@
 </head>
 <body>
     <div id="controls">
-        Width<input type="number" id="sizeX" max="100">
-        Height<input type="number" id="sizeY" max="100">
-        Bombs<input type="number" id="bombInput">
+        Width<input type="number" id="sizeX" min="1" max="100" value="1">
+        Height<input type="number" id="sizeY" min="1" max="100" value="1">
+        Bombs<input type="number" id="bombInput" min="1" max="1000" value="1">
         <button onclick="create()">Create</button>
     </div>
     <div id="reset" style="display: none;">
