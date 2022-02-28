@@ -31,13 +31,29 @@ input {
     margin: auto;
     margin-top: 20px;
     margin-bottom: 30px;
-    width: min-content;
-    text-align: center;
+    height: 50px;
+    width: 400px;
+    border: solid black 5px;
+    border-radius: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 'flags reset timer';
 }
 
 .resetBtn {
     width: 100px;
     height: 40px;
+    grid-area: reset;
+    margin: auto;
+}
+
+.flags {
+    grid-area: flags;
+    margin: auto;
+}
+
+.timer {
+    grid-area: timer;
+    margin: auto;
 }
 
 .flag {

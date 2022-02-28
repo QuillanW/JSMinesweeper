@@ -2,15 +2,19 @@ var bombLocations = [];
 let flagged = false;
 let clickedAmount = 0;
 let flaggedBombs = 0;
+let time = 0;
 
 function create() {
     document.getElementById('controls').style.display = 'none';
-    document.getElementById('gameControls').style.display = 'block';
+    document.getElementById('gameControls').style.display = 'grid';
 
     sizeX = document.getElementById('sizeX').value;
     sizeY = document.getElementById('sizeY').value;
     bombsPercent = document.getElementById('bombInput').value;
     bombs = Math.floor(sizeX * sizeY * (bombsPercent / 100));
+    if (bombs == 0) {
+        bombs = 1;
+    }
     bombsFix = bombs
 
     document.getElementById('flaggedBombs').innerHTML = 'Flags: ' + bombs
@@ -67,6 +71,7 @@ function create() {
         newButton.style.grid = posX + '/' + posY;
         gameContainer.appendChild(newButton);
     }
+    setInterval(timer, 1000);
 }
 
 function checkHit() {
@@ -155,6 +160,11 @@ function placeFlag() {
     }
 
     document.getElementById('flaggedBombs').innerHTML = 'Flags: ' + (bombsFix - flaggedBombs);
+}
+
+function timer() {
+    time++;
+    document.getElementById('timer').innerHTML = 'Time: ' + (time);
 }
 
 function endGame(win) {
