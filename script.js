@@ -4,29 +4,30 @@ let clickedAmount = 0;
 
 function create() {
     document.getElementById('controls').style.display = 'none';
-    document.getElementById('reset').style.display = 'block';
+    document.getElementById('gameControls').style.display = 'block';
 
     sizeX = document.getElementById('sizeX').value;
     sizeY = document.getElementById('sizeY').value;
-    bombs = document.getElementById('bombInput').value;
+    bombsPercent = document.getElementById('bombInput').value;
+    bombs = Math.floor(sizeX * sizeY * (bombsPercent / 100));
 
     for (let i = 0; i < bombs; i++) {
         newBombLocation = Math.round(Math.random() * (sizeX * sizeY))
         for (let l = 0; l < bombLocations.length; l++) {
             if (newBombLocation == bombLocations[l]) {
-                newBombLocation = -100;
-                i--;
+                bombs++;
+                newBombLocation = -100 - i;
             }
         }
-        bombLocations.push(newBombLocation);
     }
 
-    console.log(bombLocations)
+    console.log(bombLocations);
 
     let posX = 0;
     let posY = 0;
 
     var gameContainer = document.getElementById('container');
+    gameContainer.addEventListener('contextmenu', event => event.preventDefault());
 
     gameContainer.style.width = sizeX * 20 + "px";
     gameContainer.style.height = sizeY * 20 + "px";
@@ -64,7 +65,6 @@ function create() {
 }
 
 function checkHit() {
-    console.log('checking')
     clicked = event.target.id;
     clickedBtn = event.target
     clickedXY = clicked / sizeX + 1.1
@@ -123,8 +123,6 @@ function checkHit() {
     }
     
     clickedAmount++;
-
-    console.log(clickedAmount, (sizeX * sizeY - bombs))
 
     if (clickedAmount == (sizeX * sizeY - bombs)) {
         endGame(true)
