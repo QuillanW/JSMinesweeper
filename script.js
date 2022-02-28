@@ -70,7 +70,6 @@ function create() {
                 default:
             }
         });
-
         if (posX == sizeX) {
             posX = 0;
             posY++;
