@@ -1,6 +1,7 @@
 var bombLocations = [];
 let flagged = false;
 let clickedAmount = 0;
+let flaggedBombs = 0;
 
 function create() {
     document.getElementById('controls').style.display = 'none';
@@ -10,6 +11,9 @@ function create() {
     sizeY = document.getElementById('sizeY').value;
     bombsPercent = document.getElementById('bombInput').value;
     bombs = Math.floor(sizeX * sizeY * (bombsPercent / 100));
+    bombsFix = bombs
+
+    document.getElementById('flaggedBombs').innerHTML = 'Flags: ' + bombs
 
     for (let i = 0; i < bombs; i++) {
         newBombLocation = Math.round(Math.random() * (sizeX * sizeY))
@@ -19,6 +23,7 @@ function create() {
                 newBombLocation = -100 - i;
             }
         }
+        bombLocations.push(newBombLocation);
     }
 
     console.log(bombLocations);
@@ -65,6 +70,7 @@ function create() {
 }
 
 function checkHit() {
+    console.log('checking')
     clicked = event.target.id;
     clickedBtn = event.target
     clickedXY = clicked / sizeX + 1.1
@@ -79,9 +85,9 @@ function checkHit() {
 
         if (onBegin) {
             checkFront = 1;
-            checkBack = 10000000;
+            checkBack = 1000000000000000000000000000;
         } else if (onEnd) {
-            checkFront = 10000000;
+            checkFront = 1000000000000000000000000000;
             checkBack = 1;
         } else {
             checkFront = 1;
@@ -114,15 +120,20 @@ function checkHit() {
             clickedBtn.classList.add('boom')
         } else if (clicked != bombLocations[i]) {
             clickedBtn.classList.add('safe')
+            
             if (bombsNear == 0) {
                 bombsNear = "";
-                
             }
             clickedBtn.innerHTML = bombsNear;
         }
     }
+
+    if ((clickedBtn.name) != 'safe') {
+        clickedAmount++;
+        clickedBtn.name = 'safe';
+        console.log(clickedAmount)
+    }
     
-    clickedAmount++;
 
     if (clickedAmount == (sizeX * sizeY - bombs)) {
         endGame(true)
@@ -133,13 +144,17 @@ function placeFlag() {
     clicked = event.target;
     flagged = clicked.name == 'flag';
     
-    if (flagged) {
+    if (flagged == true) {
         clicked.classList.remove('flag')
         clicked.name = ''
-    } else {
+        flaggedBombs--;
+    } else if (flagged == false) {
         clicked.classList.add('flag')
         clicked.name = 'flag'
+        flaggedBombs++;
     }
+
+    document.getElementById('flaggedBombs').innerHTML = 'Flags: ' + (bombsFix - flaggedBombs);
 }
 
 function endGame(win) {
@@ -147,15 +162,13 @@ function endGame(win) {
         setTimeout(function() {
             window.alert('You won!')
             reset();
-        }, 500);
-        reset();
+        }, 100);
     } else if (win == false) {
         setTimeout(function() {
             window.alert('You lost!')
             reset();
-        }, 500);
+        }, 100);
     }
-    
 }
 
 function reset() {

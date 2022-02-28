@@ -32,6 +32,7 @@ input {
     margin-top: 20px;
     margin-bottom: 30px;
     width: min-content;
+    text-align: center;
 }
 
 .resetBtn {
