@@ -182,7 +182,7 @@ function endGame(win) {
     if (win) {
         setTimeout(function() {
             var username = window.prompt("What's your name?")
-            if (username.toLowerCase() == 'merijn') {
+            if (username.toLowerCase() == 'merijn' || username.toLowerCase() == 'kryda') {
                 window.alert('You won babe!\n love youuuu!!!')
             } else {
                 window.alert(`You won ${username}!`)
