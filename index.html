@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
     <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div id="controls">
@@ -16,6 +16,9 @@
             Height<input type="number" id="sizeY" min="1" value="10">
             Bombs (%)<input type="number" id="bombInput" min="1" max="100" value="10">
             <button onclick="create()">Create</button>
+            <h3>High score:</h3>
+            <h3 id="highScore"></h3>
+            <button onclick="resetScore()">Reset highscore</button>
         </fieldset>
     </div>
     <div id="gameControls" style="display: none;">

@@ -4,6 +4,17 @@ let clickedAmount = 0;
 let flaggedBombs = 0;
 let time = 0;
 
+let highScore = document.cookie
+
+if (highScore == "" || highScore == 0) {
+    message = 'No highscore yet'
+    highScore = 1000000000000000000000000000000000
+} else {
+    message = highScore + ' seconds'
+}
+
+document.getElementById('highScore').innerHTML = message
+
 function create() {
     document.getElementById('controls').style.display = 'none';
     document.getElementById('gameControls').style.display = 'grid';
@@ -29,8 +40,6 @@ function create() {
         }
         bombLocations.push(newBombLocation);
     }
-
-    console.log(bombLocations);
 
     let posX = 0;
     let posY = 0;
@@ -75,7 +84,6 @@ function create() {
 }
 
 function checkHit() {
-    console.log('checking')
     clicked = event.target.id;
     clickedBtn = event.target
     clickedXY = clicked / sizeX + 1.1
@@ -136,7 +144,6 @@ function checkHit() {
     if ((clickedBtn.name) != 'safe') {
         clickedAmount++;
         clickedBtn.name = 'safe';
-        console.log(clickedAmount)
     }
     
 
@@ -167,10 +174,18 @@ function timer() {
     document.getElementById('timer').innerHTML = 'Time: ' + (time);
 }
 
+function resetScore() {
+    document.cookie = 0;
+    reset();
+}
+
 function endGame(win) {
     if (win) {
         setTimeout(function() {
             window.alert('You won!')
+            if (time < highScore) {
+                document.cookie = time;
+            }
             reset();
         }, 100);
     } else if (win == false) {
