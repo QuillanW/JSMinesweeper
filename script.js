@@ -182,7 +182,12 @@ function resetScore() {
 function endGame(win) {
     if (win) {
         setTimeout(function() {
-            window.alert('You won!')
+            var username = window.prompt("What's your name?")
+            if (username.toLowerCase() == 'merijn') {
+                window.alert('You won babe!\n love youuuu!!!')
+            } else {
+                window.alert(`You won ${username}!`)
+            }
             if (time < highScore) {
                 document.cookie = time;
             }
