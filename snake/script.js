@@ -18,18 +18,18 @@ function createGame() {
     var container = document.getElementById('container')
     container.style.display = 'grid';
 
-    for (let i = 1; i <= 361; i++) {
+    for (let i = 1; i <= 400; i++) {
         var newSpot = document.createElement('div');
-        newSpot.id = (i / 20 - 0.05).toFixed(2);
+        newSpot.id = (i / 20).toFixed(2);
         newSpot.classList.add('spot');
         container.appendChild(newSpot);
 
-        var posX = 0.05;
-        var posY = 0.05;
+        var posX = 0;
+        var posY = 0;
 
         if (posX > 20) {
             posY++;
-            posX = 0.05;
+            posX = 0;
         } else {
             posX++;
         }
@@ -63,7 +63,7 @@ function gameTick() {
         headLocation = headLocation + 0.05;
     }
 
-    if (headLocation >= 20 || headLocation < 0) {
+    if (headLocation >= 20 || headLocation < 0 || (Math.floor(headLocation) < Math.floor(oldHeadlocation) && direction == 'a') || (Math.floor(headLocation -0.05) > Math.floor(oldHeadlocation) && direction == 'd')) {
         gameEnd(false)
     }
 

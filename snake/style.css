@@ -23,8 +23,8 @@ body {
     display: none;
     margin: auto;
     width: min-content;
-    grid-template-columns: repeat(19, 30px);
-    grid-template-rows: repeat(19, 30px);
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(20, 30px);
     border: solid black 1px;
 }
 
