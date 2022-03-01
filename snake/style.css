@@ -1,0 +1,37 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgb(148, 164, 179);
+}
+
+#startPage {
+    margin: auto;
+    margin-top: 200px;
+    width: min-content;
+    text-align: center;
+}
+
+.create {
+    margin-top: 10px;
+    width: 150px;
+    height: 60px;
+}
+
+#container {
+    display: none;
+    margin: auto;
+    width: min-content;
+    grid-template-columns: repeat(19, 30px);
+    grid-template-rows: repeat(19, 30px);
+    border: solid black 1px;
+}
+
+.spot {
+    border: solid black 2px;
+}
+
+.head {
+    background-color: green;
+}
