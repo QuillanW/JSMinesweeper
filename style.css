@@ -1,0 +1,64 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgb(148, 164, 179);
+}
+
+.wrap {
+    width: 200px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 22px 10px 22px 10px 22px;
+    grid-template-columns: 150px 20px;
+    grid-template-areas: 
+    'link1 img1'
+    '. .'
+    'link2 img2'
+    '. .'
+    'link3 img3';
+}
+
+.link1 {
+    grid-area: link1;
+}
+
+.img1 {
+    grid-area: img1;
+}
+
+.link2 {
+    grid-area: link2;
+}
+
+.img2 {
+    grid-area: img2;
+}
+
+.link3 {
+    grid-area: link3;
+}
+
+.img3 {
+    grid-area: img3;
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 0px;
+}
+
+.link:hover {
+    color: grey;
+}
+
+img {
+    margin-left: 20px;
+}
