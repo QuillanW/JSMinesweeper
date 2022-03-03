@@ -35,3 +35,7 @@ body {
 .head {
     background-color: green;
 }
+
+.dot {
+    background-color: orangered;
+}

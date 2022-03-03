@@ -1,6 +1,10 @@
 let direction = '';
 let pressedKey = '';
-let headLocation = 10.50
+let headLocation = 10.50;
+let snakeLocations = [0];
+let newCorrectDotLocation = 0.05;
+let oldDotLocation = 0.05;
+let newInterval = 0;
 
 function createGame() {
     document.getElementById('startPage').style.display = 'none'
@@ -37,6 +41,23 @@ function createGame() {
         newSpot.style.grid = posX + '/' + posY;
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
+
+    createNewDot();
+}
+    
+function createNewDot() {
+    oldDotLocation = newCorrectDotLocation;
+    newDotLocation = Math.floor(Math.random() * 400);
+    for (let i = 0; i < snakeLocations.length; i++) {
+        if (newDotLocation == snakeLocations[i]) {
+            createNewDot();
+            newCorrectDotLocation = null;
+        } else {
+            newCorrectDotLocation = newDotLocation / 20;
+        }
+    }
+    document.getElementById(oldDotLocation.toFixed(2)).classList.remove('dot')
+    document.getElementById(newCorrectDotLocation.toFixed(2)).classList.add('dot')
 }
 
 function gameTick() {
@@ -68,6 +89,23 @@ function gameTick() {
         gameEnd(false)
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
+
+    if (headLocation.toFixed(2) == newCorrectDotLocation.toFixed(2)) {
+        createNewDot();
+        changeInterval();
+    }
+}
+
+function changeInterval() {
+    if (newInterval < document.getElementById('startInterval')) {
+        newInterval++
+    }
+
+    1000 - ((document.getElementById('startInterval').value - 1) * 100)
+
+    newCorrectInterval = startGameInterval - newInterval
+
+    setInterval(gameTick, newCorrectInterval)
 }
 
 function gameEnd(win) {
