@@ -51,7 +51,7 @@ function gameTick() {
         pressedKey = 'w';
     }
 
-    var oldHeadlocation = headLocation
+    var oldHeadLocation = headLocation
     
     if (pressedKey == 'w' && direction != 's') {
         headLocation--;
@@ -63,11 +63,10 @@ function gameTick() {
         headLocation = headLocation + 0.05;
     }
 
-    if (headLocation >= 20 || headLocation < 0 || (Math.floor(headLocation) < Math.floor(oldHeadlocation) && direction == 'a') || (Math.floor(headLocation -0.05) > Math.floor(oldHeadlocation) && direction == 'd')) {
+    direction = pressedKey;
+    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation) < Math.floor(oldHeadLocation - 0.05)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation - 0.05)) && direction == 'd')) {
         gameEnd(false)
     }
-
-    direction = pressedKey;
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
 }
 
