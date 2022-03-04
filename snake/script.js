@@ -5,15 +5,16 @@ let snakeLocations = [0];
 let newCorrectDotLocation = 0.05;
 let oldDotLocation = 0.05;
 let newInterval = 0;
+let startGameInterval = 0;
 
 function createGame() {
     document.getElementById('startPage').style.display = 'none'
-    let startGameInterval = 1000 - ((document.getElementById('startInterval').value - 1) * 100)
+    startGameInterval = 1000 - ((document.getElementById('startInterval').value - 1) * 100)
     if (startGameInterval < 100) {
         window.alert('Invalid game speed')
         location.reload()
     }
-    setInterval(gameTick, startGameInterval)
+    interval = setInterval(gameTick, startGameInterval)
     console.log(startGameInterval)
     document.addEventListener('keydown', function(e) {
         pressedKey = e.key
@@ -85,7 +86,7 @@ function gameTick() {
     }
 
     direction = pressedKey;
-    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation) < Math.floor(oldHeadLocation - 0.05)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation - 0.05)) && direction == 'd')) {
+    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation + 0.05) < Math.floor(oldHeadLocation + 0.05)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation - 0.05)) && direction == 'd')) {
         gameEnd(false)
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
@@ -97,15 +98,16 @@ function gameTick() {
 }
 
 function changeInterval() {
-    if (newInterval < document.getElementById('startInterval')) {
-        newInterval++
+    if (newInterval < (10 - document.getElementById('startInterval').value)) {
+        newInterval++;
     }
+    
+    newCorrectInterval = startGameInterval - (newInterval * 100)
 
-    1000 - ((document.getElementById('startInterval').value - 1) * 100)
+    clearInterval(interval)
+    interval = setInterval(gameTick, newCorrectInterval)
 
-    newCorrectInterval = startGameInterval - newInterval
-
-    setInterval(gameTick, newCorrectInterval)
+    console.log(interval)
 }
 
 function gameEnd(win) {
