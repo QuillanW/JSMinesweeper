@@ -12,16 +12,18 @@
         window.onload=function(){
         var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
         if (mobile) {
-            alert("Visit this on a Computer for Better View");              
+            alert("Many functions only work on PC!");
+            document.getElementById('2').disabled = true
+            document.getElementById('3').disabled = true
         }
       }
       </script>
     <fieldset class="wrap">
         <legend>Games</legend>
         <div class="container">
-            <a class="link link1" href="minesweeper/index.html">Minesweeper</a><img class="img1" src="minesweeper/flag1.png">
-            <a class="link link2" href="snake/index.html">Snake</a><img class="img2" src="WIP.png">
-            <a class="link link3" href="flyer/index.html">Flyer</a><img class="img3" src="flyer/flyer1.png">
+            <a id="1" class="link link1" href="minesweeper/index.html">Minesweeper</a><img class="img1" src="minesweeper/flag1.png">
+            <a id="2" class="link link2" href="snake/index.html">Snake</a><img class="img2" src="WIP.png">
+            <a id="3" class="link link3" href="flyer/index.html">Flyer</a><img class="img3" src="flyer/flyer1.png">
         </div>
     </fieldset>
 </body>
