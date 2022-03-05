@@ -63,10 +63,6 @@ img {
     margin-left: 20px;
 }
 
-#warning {
-    display: none;
-}
-
 .warn {
     background-color: orange;
 }

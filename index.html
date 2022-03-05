@@ -12,7 +12,6 @@
     window.onload=function(){
         var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
         if (mobile) {
-            alert("Many functions do not work on mobile devices!");
             document.getElementById('warning').style.display = 'block'
             document.getElementById('1').classList.add('warn')
             document.getElementById('2').classList.add('error')
@@ -22,7 +21,7 @@
       </script>
     <fieldset class="wrap">
         <legend>Games</legend>
-        <div id="warning">
+        <div id="warning" style="display: none;">
             <h2>WARNING!</h2>
             <p>You are using this page on mobile.</p>
             <p>Some features are not available (due to the need of a keyboard or mouse).</p>
