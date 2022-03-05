@@ -9,12 +9,12 @@
 </head>
 <body>
     <script language="Javascript">
-        window.onload=function(){
+    window.onload=function(){
         var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
         if (mobile) {
             alert("Many functions do not work on mobile devices!");
-            document.getElementById('2').disabled = true
-            document.getElementById('3').disabled = true
+            document.getElementById('2').style.display = 'none'
+            document.getElementById('3').style.display = 'none'
         }
       }
       </script>
