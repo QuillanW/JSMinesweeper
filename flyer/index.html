@@ -5,14 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flyer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div id="startPage">
         <fieldset>
             <legend>Flyer</legend>
-            Starting speed <input type="range" id="startInterval" value="1" min="1" max="10">
+            Starting speed <input type="range" id="startSpeed" value="1" min="1" max="10">
             <button onclick="createGame()" class="create">Start Game</button>
         </fieldset>
+    </div>
+    <div id="gameControls">
+        <h2 id="scoreCount">Score: 0</h2>
     </div>
     <div id="container">
     </div>
