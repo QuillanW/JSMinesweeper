@@ -6,6 +6,8 @@ body {
     background-color: rgb(148, 164, 179);
 }
 
+
+
 #controls {
     margin: auto;
     margin-top: 200px;
@@ -15,6 +17,12 @@ body {
 
 input {
     margin: 6px;
+}
+
+.button {
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
 }
 
 #container {

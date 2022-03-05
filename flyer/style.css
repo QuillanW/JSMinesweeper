@@ -19,6 +19,12 @@ body {
     height: 60px;
 }
 
+.button {
+    margin: auto;
+    margin-top: 10px;
+    width: 150px;
+}
+
 #container {
     display: none;
     position: relative;
