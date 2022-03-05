@@ -62,3 +62,15 @@ body {
 img {
     margin-left: 20px;
 }
+
+#warning {
+    display: none;
+}
+
+.warn {
+    color: orangered;
+}
+
+.error {
+    color: red;
+}

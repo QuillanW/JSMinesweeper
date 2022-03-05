@@ -13,19 +13,24 @@
         var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
         if (mobile) {
             alert("Many functions do not work on mobile devices!");
-            document.getElementById('2').style.display = 'none'
-            document.getElementById('3').style.display = 'none'
-            document.getElementById('m2').style.display = 'none'
-            document.getElementById('m3').style.display = 'none'
+            document.getElementById('1').classList.add('warn')
+            document.getElementById('2').classList.add('error')
+            document.getElementById('3').classList.add('error')
         }
       }
       </script>
     <fieldset class="wrap">
         <legend>Games</legend>
+        <div id="warning">
+            <h2>WARNING!</h2>
+            <p>You are using this page on mobile.</p>
+            <p>Some features are not available (due to the need of a keyboard or mouse).</p>
+            <p>If a game is red you are not able to play it on mobile, if it's orange, you are able to play it, but certain functions are missing.</p>
+        </div>
         <div class="container">
-            <a id="1" class="link link1" href="minesweeper/index.html">Minesweeper</a><img id="m1" class="img1" src="minesweeper/flag1.png">
-            <a id="2" class="link link2" href="snake/index.html">Snake</a><img id="m2" class="img2" src="WIP.png">
-            <a id="3" class="link link3" href="flyer/index.html">Flyer</a><img id="m3" class="img3" src="flyer/flyer1.png">
+            <a id="1" class="link link1" href="minesweeper/index.html">Minesweeper</a><img class="img1" src="minesweeper/flag1.png">
+            <a id="2" class="link link2" href="snake/index.html">Snake</a><img class="img2" src="WIP.png">
+            <a id="3" class="link link3" href="flyer/index.html">Flyer</a><img class="img3" src="flyer/flyer1.png">
         </div>
     </fieldset>
 </body>
