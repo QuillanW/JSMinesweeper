@@ -13,6 +13,7 @@
         var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
         if (mobile) {
             alert("Many functions do not work on mobile devices!");
+            document.getElementById('warning').style.display = 'block'
             document.getElementById('1').classList.add('warn')
             document.getElementById('2').classList.add('error')
             document.getElementById('3').classList.add('error')
