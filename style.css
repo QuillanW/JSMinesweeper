@@ -64,9 +64,9 @@ img {
 }
 
 .warn {
-    color: orange;
+    background-color: orangered;
 }
 
 .error {
-    color: red;
+    background-color: darkred;
 }
