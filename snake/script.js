@@ -2,6 +2,7 @@ let direction = '';
 let pressedKey = '';
 let headLocation = 10.50;
 let snakeLocations = [0];
+let snakeLength = 0;
 let newCorrectDotLocation = 0.05;
 let oldDotLocation = 0.05;
 let newInterval = 0;
@@ -56,12 +57,14 @@ function createNewDot() {
             newCorrectDotLocation = newDotLocation / 20;
         }
     }
+    console.log('HIT')
     document.getElementById(oldDotLocation.toFixed(2)).classList.remove('dot')
     document.getElementById(newCorrectDotLocation.toFixed(2)).classList.add('dot')
 }
 
 function gameTick() {
     document.getElementById(headLocation.toFixed(2)).classList.remove('head')
+    console.log(document.getElementById(headLocation.toFixed(2)))
     if (pressedKey == 'a' && direction == 'd') {
         pressedKey = 'd';
     } else if (pressedKey == 'd' && direction == 'a') {
@@ -71,6 +74,8 @@ function gameTick() {
     } else if (pressedKey == 's' && direction == 'w') {
         pressedKey = 'w';
     }
+
+    snakeLocations = {}
 
     var oldHeadLocation = headLocation
     
@@ -86,16 +91,21 @@ function gameTick() {
 
     direction = pressedKey;
 
-    console.log(headLocation.toFixed(2), oldHeadLocation.toFixed(2))
-
-    if ((headLocation- 0.05) > 20 || headLocation < 0 || ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') || ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd')) {
-        gameEnd(false)
+    if ((headLocation- 0.05) > 20 || headLocation < 0 || 
+    ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') || 
+    ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd')) 
+    {
+        window.alert('You lost!')
+        location.reload()
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
 
-    if (headLocation.toFixed(2) == newCorrectDotLocation.toFixed(2)) {
+    console.log(headLocation.toFixed(2), newCorrectDotLocation.toFixed(2))
+
+    if (headLocation == newCorrectDotLocation) {
         createNewDot();
         changeInterval();
+        snakeLength++
     }
 }
 
@@ -108,11 +118,4 @@ function changeInterval() {
 
     clearInterval(interval)
     interval = setInterval(gameTick, newCorrectInterval)
-}
-
-function gameEnd(win) {
-    if (win == false) {
-        window.alert('You lost!')
-        location.reload()
-    }
 }
