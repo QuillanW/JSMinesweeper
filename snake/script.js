@@ -86,7 +86,10 @@ function gameTick() {
     }
 
     direction = pressedKey;
-    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation + 0.05) < Math.floor(oldHeadLocation + 0.05)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation - 0.05)) && direction == 'd')) {
+
+    console.log(headLocation.toFixed(2), oldHeadLocation.toFixed(2))
+
+    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation) < Math.floor(oldHeadLocation)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation -0.05)) && direction == 'd')) {
         gameEnd(false)
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
