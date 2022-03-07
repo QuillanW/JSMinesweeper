@@ -14,8 +14,7 @@ function createGame() {
         window.alert('Invalid game speed')
         location.reload()
     }
-    interval = setInterval(gameTick, startGameInterval)
-    console.log(startGameInterval)
+    interval = setInterval(gameTick, startGameInterval) 
     document.addEventListener('keydown', function(e) {
         pressedKey = e.key
     });
@@ -78,18 +77,18 @@ function gameTick() {
     if (pressedKey == 'w' && direction != 's') {
         headLocation--;
     } else if (pressedKey == 'a' && direction != 'd') {
-        headLocation = headLocation - 0.05;
+        headLocation -= 0.05;
     } else if (pressedKey == 's' && direction != 'w') {
         headLocation++;
     } else if (pressedKey == 'd' && direction != 'a') {
-        headLocation = headLocation + 0.05;
+        headLocation += 0.05;
     }
 
     direction = pressedKey;
 
     console.log(headLocation.toFixed(2), oldHeadLocation.toFixed(2))
 
-    if (headLocation >= 20 || headLocation < 0 || ((Math.floor(headLocation) < Math.floor(oldHeadLocation)) && direction == 'a') || ((Math.floor(headLocation - 0.05) > Math.floor(oldHeadLocation -0.05)) && direction == 'd')) {
+    if ((headLocation- 0.05) > 20 || headLocation < 0 || ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') || ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd')) {
         gameEnd(false)
     }
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
@@ -109,8 +108,6 @@ function changeInterval() {
 
     clearInterval(interval)
     interval = setInterval(gameTick, newCorrectInterval)
-
-    console.log(interval)
 }
 
 function gameEnd(win) {
