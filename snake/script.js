@@ -16,8 +16,8 @@ function createGame() {
         window.alert('Invalid game speed')
         location.reload()
     }
-    interval = setInterval(gameTick, startGameInterval) 
-    document.addEventListener('keydown', function(e) {
+    interval = setInterval(gameTick, startGameInterval)
+    document.addEventListener('keydown', function (e) {
         pressedKey = e.key
     });
 
@@ -46,7 +46,7 @@ function createGame() {
 
     createNewDot();
 }
-    
+
 function createNewDot() {
     oldDotLocation = newCorrectDotLocation;
     newDotLocation = Math.floor(Math.random() * 400);
@@ -78,8 +78,6 @@ function gameTick() {
         pressedKey = 'w';
     }
 
-    
-
     var oldHeadLocation = headLocation
 
     snakeLocations.unshift(headLocation.toFixed(2))
@@ -87,7 +85,7 @@ function gameTick() {
     if (snakeLocations.length > snakeLength + 2) {
         snakeLocations.pop();
     }
-    
+
     console.log(snakeLocations)
 
     if (pressedKey == 'w' && direction != 's') {
@@ -104,10 +102,10 @@ function gameTick() {
 
     let onSelf = false
 
-    setTimeout(function() {
-            safe = true
-    },3000)
-    
+    setTimeout(function () {
+        safe = true
+    }, 3000)
+
     for (let i = 0; i < snakeLocations.length; i++) {
         for (let l = 0; l < snakeLocations.length; l++) {
             if (snakeLocations[i] == snakeLocations[l] && safe && (i != l)) {
@@ -115,19 +113,14 @@ function gameTick() {
             }
         }
     }
-    
-    
 
-    if ((headLocation- 0.05) > 20 || headLocation < 0 || 
-    ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') || 
-    ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd') ||
-    onSelf) 
-    {
+    if ((headLocation - 0.05) > 20 || headLocation < 0 ||
+        ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') ||
+        ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation - 0.04)) && direction == 'd') ||
+        onSelf) {
         window.alert('You lost!')
         location.reload()
     }
-
-
 
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
 
@@ -146,7 +139,7 @@ function changeInterval() {
     if (newInterval < (10 - document.getElementById('startInterval').value)) {
         newInterval++;
     }
-    
+
     newCorrectInterval = startGameInterval - (newInterval * 100)
 
     clearInterval(interval)

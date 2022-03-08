@@ -90,4 +90,3 @@ function gameLoop() {
     score += 0.2
     document.getElementById('scoreCount').innerHTML = 'Score: ' + (score.toFixed(0) - startSpeed)
 }
-
