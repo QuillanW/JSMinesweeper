@@ -1,12 +1,13 @@
 let direction = '';
 let pressedKey = '';
 let headLocation = 10.50;
-let snakeLocations = [0];
+let snakeLocations = [0, 0];
 let snakeLength = 0;
 let newCorrectDotLocation = 0.05;
 let oldDotLocation = 0.05;
 let newInterval = 0;
 let startGameInterval = 0;
+let safe = false;
 
 function createGame() {
     document.getElementById('startPage').style.display = 'none'
@@ -57,14 +58,16 @@ function createNewDot() {
             newCorrectDotLocation = newDotLocation / 20;
         }
     }
-    console.log('HIT')
     document.getElementById(oldDotLocation.toFixed(2)).classList.remove('dot')
     document.getElementById(newCorrectDotLocation.toFixed(2)).classList.add('dot')
 }
 
 function gameTick() {
     document.getElementById(headLocation.toFixed(2)).classList.remove('head')
-    console.log(document.getElementById(headLocation.toFixed(2)))
+    if (snakeLocations[snakeLocations.length - 2] != 0) {
+        document.getElementById(snakeLocations[snakeLocations.length - 2]).classList.remove('body')
+    }
+
     if (pressedKey == 'a' && direction == 'd') {
         pressedKey = 'd';
     } else if (pressedKey == 'd' && direction == 'a') {
@@ -75,10 +78,18 @@ function gameTick() {
         pressedKey = 'w';
     }
 
-    snakeLocations = {}
+    
 
     var oldHeadLocation = headLocation
+
+    snakeLocations.unshift(headLocation.toFixed(2))
+
+    if (snakeLocations.length > snakeLength + 2) {
+        snakeLocations.pop();
+    }
     
+    console.log(snakeLocations)
+
     if (pressedKey == 'w' && direction != 's') {
         headLocation--;
     } else if (pressedKey == 'a' && direction != 'd') {
@@ -91,18 +102,40 @@ function gameTick() {
 
     direction = pressedKey;
 
+    let onSelf = false
+
+    setTimeout(function() {
+            safe = true
+    },3000)
+    
+    for (let i = 0; i < snakeLocations.length; i++) {
+        for (let l = 0; l < snakeLocations.length; l++) {
+            if (snakeLocations[i] == snakeLocations[l] && safe && (i != l)) {
+                onSelf = true
+            }
+        }
+    }
+    
+    
+
     if ((headLocation- 0.05) > 20 || headLocation < 0 || 
     ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') || 
-    ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd')) 
+    ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation -  0.04)) && direction == 'd') ||
+    onSelf) 
     {
         window.alert('You lost!')
         location.reload()
     }
+
+
+
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
 
-    console.log(headLocation.toFixed(2), newCorrectDotLocation.toFixed(2))
+    for (let i = 0; i < snakeLength + 1; i++) {
+        document.getElementById(snakeLocations[i]).classList.add('body')
+    }
 
-    if (headLocation == newCorrectDotLocation) {
+    if (headLocation.toFixed(2) == newCorrectDotLocation.toFixed(2)) {
         createNewDot();
         changeInterval();
         snakeLength++
