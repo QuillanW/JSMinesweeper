@@ -14,14 +14,16 @@ body {
 
 .container {
     display: grid;
-    grid-template-rows: 22px 10px 22px 10px 22px;
+    grid-template-rows: 22px 10px 22px 10px 22px 10px 22px;
     grid-template-columns: 150px 20px;
-    grid-template-areas: 
-    'link1 img1'
-    '. .'
-    'link2 img2'
-    '. .'
-    'link3 img3';
+    grid-template-areas:
+        'link1 img1'
+        '. .'
+        'link2 img2'
+        '. .'
+        'link3 img3'
+        '. .'
+        'link4 img4';
 }
 
 .link1 {
@@ -46,6 +48,14 @@ body {
 
 .img3 {
     grid-area: img3;
+}
+
+.link4 {
+    grid-area: link4;
+}
+
+.img4 {
+    grid-area: img4;
 }
 
 .link {
