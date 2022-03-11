@@ -38,14 +38,15 @@ body {
     border: solid black 2px;
 }
 
-.head {
+.body {
     background-color: green;
+}
+
+.head {
+    background: url("snake.png");
 }
 
 .dot {
     background-color: orangered;
 }
 
-.body {
-    background-color: green;
-}

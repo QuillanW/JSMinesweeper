@@ -1,5 +1,5 @@
-let direction = '';
-let pressedKey = '';
+let direction = 'd';
+let pressedKey = 'd';
 let headLocation = 10.50;
 let snakeLocations = [0, 0];
 let snakeLength = 0;
@@ -100,8 +100,6 @@ function gameTick() {
 
     direction = pressedKey;
 
-    let onSelf = false
-
     setTimeout(function () {
         safe = true
     }, 3000)
@@ -109,17 +107,18 @@ function gameTick() {
     for (let i = 0; i < snakeLocations.length; i++) {
         for (let l = 0; l < snakeLocations.length; l++) {
             if (snakeLocations[i] == snakeLocations[l] && safe && (i != l)) {
-                onSelf = true
+                location.reload()
+                window.alert('You lost!')
             }
         }
     }
 
     if ((headLocation - 0.05) > 20 || headLocation < 0 ||
         ((Math.floor(headLocation - 0.04) < Math.floor(oldHeadLocation - 0.04)) && direction == 'a') ||
-        ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation - 0.04)) && direction == 'd') ||
-        onSelf) {
-        window.alert('You lost!')
+        ((Math.floor(headLocation - 0.04) > Math.floor(oldHeadLocation - 0.04)) && direction == 'd')) 
+    {
         location.reload()
+        window.alert('You lost!')
     }
 
     document.getElementById(headLocation.toFixed(2)).classList.add('head')
