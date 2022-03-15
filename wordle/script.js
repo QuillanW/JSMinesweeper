@@ -2,6 +2,7 @@ const gameContainer = document.getElementById('container')
 let gameWords = []
 let wordLength = 5
 let userLine = 1
+let correctWord = ''
 
 document.getElementById('wordSize').addEventListener('change', sliderChange)
 function sliderChange() {
@@ -28,6 +29,7 @@ function createNewWordle() {
         newInput.id = 'userInput' + i
         newInput.type = 'text'
         newInput.classList.add('inputField')
+        newInput.autocomplete = "off"
         newInput.addEventListener('change', checkInput)
         if (i != 1) {
             newInput.disabled = true
@@ -43,14 +45,20 @@ function createWordList() {
             gameWords.unshift(words[i])
         }
     }
+    correctWord = gameWords[Math.random * gameWords.length]
 }
 
 function checkInput() {
     document.getElementById('userInput' + userLine).disabled = true
-    userLine++
+
+    for (let i = 0; i < gameWords.length; i++) {
+        if ((document.getElementById('userInput' + userLine).value) == gameWords[i]) {
+            userLine++
+        }
+    }
+
     if (userLine == 7) {
         createNewWordle()
     }
     document.getElementById('userInput' + userLine).disabled = false
-    
 }
