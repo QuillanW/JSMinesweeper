@@ -5,3 +5,40 @@
 body {
     background-color: rgb(148, 164, 179);
 }
+
+#startPage {
+    margin: auto;
+    margin-top: 200px;
+    width: min-content;
+    text-align: center;
+}
+
+.button {
+    margin: auto;
+    margin-top: 10px;
+    width: 150px;
+}
+
+.create {
+    margin-top: 10px;
+    width: 150px;
+    height: 60px;
+}
+
+#container {
+    display: none;
+    width: 500px;
+    height: 800px;
+    margin: 50px auto auto auto;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+.inputField {
+    margin: 20px;
+    width: 400px;
+    height: 80px;
+}
