@@ -41,4 +41,7 @@ p {
     margin: 20px;
     width: 400px;
     height: 80px;
+    font-size: 60px;
+    text-align: center;
+    letter-spacing: 10px;
 }

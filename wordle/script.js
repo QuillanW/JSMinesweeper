@@ -17,6 +17,14 @@ function createGame() {
     createNewWordle()
 }
 
+function createWordList() {
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].length == wordLength) {
+            gameWords.unshift(words[i])
+        }
+    }
+}
+
 function createNewWordle() {
     if (document.getElementById('wordleGame')) {
         gameContainer.removeChild(document.getElementById('wordleGame'))
@@ -37,28 +45,29 @@ function createNewWordle() {
         newWordle.appendChild(newInput)
     }
     gameContainer.appendChild(newWordle)
-}
-
-function createWordList() {
-    for (let i = 0; i < words.length; i++) {
-        if (words[i].length == wordLength) {
-            gameWords.unshift(words[i])
-        }
-    }
-    correctWord = gameWords[Math.random * gameWords.length]
+    
+    correctWord = gameWords[Math.floor(Math.random() * gameWords.length)]
+    console.log(correctWord)
 }
 
 function checkInput() {
-    document.getElementById('userInput' + userLine).disabled = true
+    var wordInput = document.getElementById('userInput' + userLine)
+    wordInput.disabled = true
 
-    for (let i = 0; i < gameWords.length; i++) {
-        if ((document.getElementById('userInput' + userLine).value) == gameWords[i]) {
-            userLine++
-        }
-    }
-
-    if (userLine == 7) {
+    if (wordInput.value.toLowerCase() == correctWord) {
+        window.alert('correct!')
         createNewWordle()
+    } else {
+        for (let i = 0; i < gameWords.length; i++) {
+            if ((wordInput.value) == gameWords[i]) {
+                userLine++
+            }
+        }
+
+        if (userLine == 7) {
+            window.alert('Too many tries!')
+            createNewWordle()
+        }
+        document.getElementById('userInput' + userLine).disabled = false
     }
-    document.getElementById('userInput' + userLine).disabled = false
 }
