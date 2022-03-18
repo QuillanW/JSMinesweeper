@@ -27,7 +27,7 @@ body {
 
 #container {
     display: none;
-    width: 500px;
+    width: 690px;
     height: 800px;
     margin: 50px auto auto auto;
     text-align: center;
@@ -37,11 +37,26 @@ p {
     margin: 0;
 }
 
-.inputField {
-    margin: 20px;
-    width: 400px;
-    height: 80px;
-    font-size: 60px;
+.inputBox {
+    height: 100px;
+    width: max-content;
+    margin: auto;
+}
+
+.letter {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
     text-align: center;
-    letter-spacing: 10px;
+    border: solid black 3px;
+    font-size: 300%;
+    float: left;
+}
+
+.correctLetter {
+    background-color: orangered;
+}
+
+.fullCorrectLetter {
+    background-color: green;
 }

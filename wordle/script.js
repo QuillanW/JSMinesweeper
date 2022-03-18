@@ -3,12 +3,47 @@ let gameWords = []
 let wordLength = 5
 let userLine = 1
 let correctWord = ''
+let key = ''
+let currentLetter = 0
+let wordInput = ''
+let checkLetter = false
 
 document.getElementById('wordSize').addEventListener('change', sliderChange)
 function sliderChange() {
     wordLength = document.getElementById('wordSize').value
     document.getElementById('wordSizeText').innerHTML = `Word size: ${wordLength} letters`
 }
+
+document.addEventListener('keydown', function () {
+    var removeLetter = (event.key == 'Backspace')
+    var isLetter = /^[a-z]$/i.test(event.key)
+    var finishLine = (event.key == 'Enter')
+
+    if (isLetter) {
+        if (currentLetter < wordLength) {
+            currentLetter++
+            wordInput += event.key
+            var inputBox = document.getElementById('inputBox' + userLine)
+            var newLetter = document.createElement('div')
+            newLetter.id = 'letter' + userLine + currentLetter
+            newLetter.classList.add('letter')
+            newLetter.innerHTML = event.key
+            inputBox.appendChild(newLetter)
+        }
+    }
+
+    if (removeLetter) {
+        if (currentLetter != 0) {
+            document.getElementById('letter' + userLine + currentLetter).remove()
+            wordInput = wordInput.slice(0, -1)
+            currentLetter--
+        }
+    }
+
+    if (finishLine && (currentLetter == wordLength)) {
+        checkInput()
+    }
+})
 
 function createGame() {
     document.getElementById('startPage').style.display = 'none'
@@ -33,34 +68,25 @@ function createNewWordle() {
     newWordle = document.createElement('div')
     newWordle.id = 'wordleGame'
     for (let i = 1; i < 7; i++) {
-        var newInput = document.createElement('input')
-        newInput.id = 'userInput' + i
-        newInput.type = 'text'
-        newInput.classList.add('inputField')
-        newInput.autocomplete = "off"
-        newInput.addEventListener('change', checkInput)
-        if (i != 1) {
-            newInput.disabled = true
-        }
-        newWordle.appendChild(newInput)
+        var newInputBox = document.createElement('div')
+        newInputBox.id = 'inputBox' + i
+        newInputBox.classList.add('inputBox')
+        newWordle.appendChild(newInputBox)
     }
     gameContainer.appendChild(newWordle)
-    
+
     correctWord = gameWords[Math.floor(Math.random() * gameWords.length)]
-    console.log(correctWord)
 }
 
 function checkInput() {
-    var wordInput = document.getElementById('userInput' + userLine)
-    wordInput.disabled = true
-
-    if (wordInput.value.toLowerCase() == correctWord) {
-        window.alert('correct!')
-        createNewWordle()
+    if (wordInput.toLowerCase() == correctWord) {
+        finishGame(true)
     } else {
         for (let i = 0; i < gameWords.length; i++) {
-            if ((wordInput.value) == gameWords[i]) {
+            if ((wordInput) == gameWords[i]) {
                 userLine++
+                currentLetter = 0
+                checkLetter = true
             }
         }
 
@@ -68,6 +94,32 @@ function checkInput() {
             window.alert('Too many tries!')
             createNewWordle()
         }
-        document.getElementById('userInput' + userLine).disabled = false
+
+        if (checkLetter) {
+            for (let i = 0; i < wordLength; i++) {
+                var correctLetter = correctWord.slice(i, i + 1)
+                var letter = wordInput.slice(i, i + 1);
+                if (letter == correctLetter) {
+                    document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('fullCorrectLetter')
+                } else {
+                    for (let l = 0; l < wordLength; l++) {
+                        if (letter == correctWord.slice(l, l + 1)) {
+                            document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('correctLetter')
+                        }
+                    }
+                }
+            }
+            wordInput = ''
+            checkLetter = false
+        }
     }
+}
+
+function finishGame(win) {
+    if (win) {
+        window.alert('Correct!')
+    }
+    createNewWordle()
+    currentLetter = 0
+    wordInput = ''
 }
