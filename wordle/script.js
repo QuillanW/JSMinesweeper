@@ -7,6 +7,7 @@ let key = ''
 let currentLetter = 0
 let wordInput = ''
 let checkLetter = false
+let score = 0
 
 document.getElementById('wordSize').addEventListener('change', sliderChange)
 function sliderChange() {
@@ -105,11 +106,13 @@ function checkInput() {
                     let letterCorrect = false
                     for (let l = 0; l < wordLength; l++) {
                         if (letter == correctWord.slice(l, l + 1)) {
+                            
                             document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('correctLetter')
                             letterCorrect = true
                         }
                     }
                     if (!letterCorrect) {
+                        console.log(userLine, i)
                         document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('incorrectLetter')
                     }
                 }
@@ -123,6 +126,8 @@ function checkInput() {
 function finishGame(win) {
     if (win) {
         window.alert('Correct!')
+        score++
+        document.getElementById('scoreCounter').innerHTML = 'Score' + score
     }
     createNewWordle()
     currentLetter = 0
