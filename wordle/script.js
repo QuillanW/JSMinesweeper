@@ -102,10 +102,15 @@ function checkInput() {
                 if (letter == correctLetter) {
                     document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('fullCorrectLetter')
                 } else {
+                    let letterCorrect = false
                     for (let l = 0; l < wordLength; l++) {
                         if (letter == correctWord.slice(l, l + 1)) {
                             document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('correctLetter')
+                            letterCorrect = true
                         }
+                    }
+                    if (!letterCorrect) {
+                        document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('incorrectLetter')
                     }
                 }
             }

@@ -53,6 +53,10 @@ p {
     float: left;
 }
 
+.incorrectLetter {
+    background-color: red;
+}
+
 .correctLetter {
     background-color: orangered;
 }
