@@ -66,6 +66,9 @@ function createNewWordle() {
         gameContainer.removeChild(document.getElementById('wordleGame'))
     }
     userLine = 1
+    currentLetter = 0
+    wordInput = ''
+    checkLetter = false
     newWordle = document.createElement('div')
     newWordle.id = 'wordleGame'
     for (let i = 1; i < 7; i++) {
@@ -92,33 +95,31 @@ function checkInput() {
         }
 
         if (userLine == 7) {
-            window.alert('Too many tries!')
+            window.alert(`Too many tries!\nThe correct word was ${correctWord}`)
             createNewWordle()
-        }
-
-        if (checkLetter) {
-            for (let i = 0; i < wordLength; i++) {
-                var correctLetter = correctWord.slice(i, i + 1)
-                var letter = wordInput.slice(i, i + 1);
-                if (letter == correctLetter) {
-                    document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('fullCorrectLetter')
-                } else {
-                    let letterCorrect = false
-                    for (let l = 0; l < wordLength; l++) {
-                        if (letter == correctWord.slice(l, l + 1)) {
-                            
-                            document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('correctLetter')
-                            letterCorrect = true
+        } else {
+            if (checkLetter) {
+                for (let i = 0; i < wordLength; i++) {
+                    var correctLetter = correctWord.slice(i, i + 1)
+                    var letter = wordInput.slice(i, i + 1);
+                    if (letter == correctLetter) {
+                        document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('fullCorrectLetter')
+                    } else {
+                        let letterCorrect = false
+                        for (let l = 0; l < wordLength; l++) {
+                            if (letter == correctWord.slice(l, l + 1)) {
+                                document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('correctLetter')
+                                letterCorrect = true
+                            }
+                        }
+                        if (!letterCorrect) {
+                            document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('incorrectLetter')
                         }
                     }
-                    if (!letterCorrect) {
-                        console.log(userLine, i)
-                        document.getElementById('letter' + (userLine - 1) + (i + 1)).classList.add('incorrectLetter')
-                    }
                 }
+                wordInput = ''
+                checkLetter = false
             }
-            wordInput = ''
-            checkLetter = false
         }
     }
 }
@@ -127,9 +128,7 @@ function finishGame(win) {
     if (win) {
         window.alert('Correct!')
         score++
-        document.getElementById('scoreCounter').innerHTML = 'Score' + score
+        document.getElementById('scoreCounter').innerHTML = 'Score: ' + score
     }
     createNewWordle()
-    currentLetter = 0
-    wordInput = ''
 }
