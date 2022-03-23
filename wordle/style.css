@@ -38,7 +38,7 @@ p {
 }
 
 .inputBox {
-    height: 100px;
+    height: 85px;
     width: max-content;
     margin: auto;
 }
@@ -63,4 +63,8 @@ p {
 
 .fullCorrectLetter {
     background-color: green;
+}
+
+.inputActive {
+    border: solid black 3px;
 }

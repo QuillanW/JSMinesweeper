@@ -78,7 +78,7 @@ function createNewWordle() {
         newWordle.appendChild(newInputBox)
     }
     gameContainer.appendChild(newWordle)
-
+    document.getElementById('inputBox' + userLine).classList.add('inputActive')
     correctWord = gameWords[Math.floor(Math.random() * gameWords.length)]
 }
 
@@ -88,7 +88,11 @@ function checkInput() {
     } else {
         for (let i = 0; i < gameWords.length; i++) {
             if ((wordInput) == gameWords[i]) {
+                document.getElementById('inputBox' + userLine).classList.remove('inputActive')
                 userLine++
+                if (userLine < 7) {
+                    document.getElementById('inputBox' + userLine).classList.add('inputActive')
+                }
                 currentLetter = 0
                 checkLetter = true
             }
