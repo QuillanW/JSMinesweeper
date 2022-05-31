@@ -14,7 +14,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-rows: 22px 10px 22px 10px 22px 10px 22px;
+    grid-template-rows: repeat(5, 22px 10px);
     grid-template-columns: 150px 20px;
     grid-template-areas:
         'link1 img1'
@@ -23,7 +23,9 @@ body {
         '. .'
         'link3 img3'
         '. .'
-        'link4 img4';
+        'link4 img4'
+        '. .'
+        'link5 img5';
 }
 
 .link1 {
@@ -56,6 +58,14 @@ body {
 
 .img4 {
     grid-area: img4;
+}
+
+.link5 {
+    grid-area: link5;
+}
+
+.img5 {
+    grid-area: img5;
 }
 
 .link {
